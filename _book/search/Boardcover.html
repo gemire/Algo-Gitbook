@@ -1,0 +1,412 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>穷举搜索之BoardCover | Introduction</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.5.2">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="../gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-highlight/website.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-search/search.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-fontsettings/website.css">
+        
+    
+    
+
+        
+    
+    
+    <link rel="next" href="../divide/readme.html" />
+    
+    
+    <link rel="prev" href="../search/Boggle.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book" data-level="1.3" data-chapter-title="穷举搜索之BoardCover" data-filepath="search/Boardcover.md" data-basepath=".." data-revision="Wed Nov 25 2015 17:55:25 GMT+0800 (中国标准时间)">
+    
+
+<div class="book-summary">
+    <nav role="navigation">
+        <ul class="summary">
+            
+            
+            
+            
+
+            
+
+            
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="../index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                        Introduction
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1" data-path="search/readme.html">
+            
+                
+                    <a href="../search/readme.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        搜索
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1" data-path="search/recursive.html">
+            
+                
+                    <a href="../search/recursive.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.1.</b>
+                        
+                        递归调用与穷举搜索
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="search/Boggle.html">
+            
+                
+                    <a href="../search/Boggle.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.2.</b>
+                        
+                        穷举搜索之Boogle
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3" data-path="search/Boardcover.html">
+            
+                
+                    <a href="../search/Boardcover.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.</b>
+                        
+                        穷举搜索之BoardCover
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2" data-path="divide/readme.html">
+            
+                
+                    <a href="../divide/readme.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        分治
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3" data-path="greedy/readme.html">
+            
+                
+                    <a href="../greedy/readme.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.</b>
+                        
+                        贪心
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4" data-path="dp/readme.html">
+            
+                
+                    <a href="../dp/readme.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.</b>
+                        
+                        动态规划
+                    </a>
+            
+            
+        </li>
+    
+
+
+            
+            <li class="divider"></li>
+            <li>
+                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                    Published with GitBook
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+    <!-- Actions Left -->
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../" >Introduction</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <p><strong>Source:</strong> <a href="https://algospot.com/judge/problem/read/BOARDCOVER" target="_blank">https://algospot.com/judge/problem/read/BOARDCOVER</a></p>
+<h3 id="problem-descirption">Problem Descirption</h3>
+<p><img src="boardcover.png" alt=""></p>
+<p>H * W size of the game are different. The game board is a grid consisting of white spaces and black and white Cannes Cannes would like to cover all of these in blocks of 3-bin-old L-shaped. This time blocks can be placed to rotate freely, but overlap one another, or cover, or a black square, the board should not go out. The above illustration shows how to cover it with a board.</p>
+<p>Write a program to count the number of ways to cover this edition of the game given.</p>
+<h3 id="input">Input</h3>
+<p>The first line of output contains the number of test cases C (C &lt;= 30) is given. The first line of each test case contains two integers H, W (1 &lt;= H, W &lt;= 20) is given. The shape of the board in each of W characters are given in the following H lines. # is a black square, . it represents a white field. The number of white space on the board is given the input does not exceed 50.</p>
+<h3 id="print">Print</h3>
+<p>The output can be one way of covering all of t</p>
+<h3 id="example-input">Example input</h3>
+<pre><code>3
+3 7
+#.....#
+#.....#
+##...##
+3 7
+#.....#
+#.....#
+##..###
+8 10
+##########
+#........#
+#........#
+#........#
+#........#
+#........#
+#........#
+##########
+</code></pre><h3 id="exaple-output">Exaple output</h3>
+<pre><code>0
+2
+1514
+</code></pre><p>Solution:</p>
+<pre><code class="lang-cpp"><span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;array&gt;</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;list&gt;</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iterator&gt;</span></span>
+
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-comment">/**
+ * https://algospot.com/judge/problem/read/PICNIC
+ *
+ */</span>
+
+<span class="hljs-comment">//board[i][j] = 1 &#x8868;&#x793A;&#x5DF2;&#x88AB;&#x8986;&#x76D6;&#x7684;&#x683C;&#x5B50;&#x6216;&#x8005;&#x9ED1;&#x683C;&#x5B50;</span>
+<span class="hljs-comment">//board[i][j] = 0 &#x8868;&#x793A;&#x672A;&#x88AB;&#x8986;&#x76D6;&#x7684;&#x683C;&#x5B50;&#x6216;&#x8005;&#x767D;&#x683C;&#x5B50;</span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> coverType[<span class="hljs-number">4</span>][<span class="hljs-number">3</span>][<span class="hljs-number">2</span>] = {
+        { {<span class="hljs-number">0</span>, <span class="hljs-number">0</span>}, {<span class="hljs-number">1</span>, <span class="hljs-number">0</span>}, {<span class="hljs-number">0</span>, <span class="hljs-number">1</span>} },
+        { {<span class="hljs-number">0</span>, <span class="hljs-number">0</span>}, {<span class="hljs-number">0</span>, <span class="hljs-number">1</span>}, {<span class="hljs-number">1</span>, <span class="hljs-number">1</span>} },
+        { {<span class="hljs-number">0</span>, <span class="hljs-number">0</span>}, {<span class="hljs-number">1</span>, <span class="hljs-number">0</span>}, {<span class="hljs-number">1</span>, <span class="hljs-number">1</span>} },
+        { {<span class="hljs-number">0</span>, <span class="hljs-number">0</span>}, {<span class="hljs-number">1</span>, <span class="hljs-number">0</span>}, {<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>} }
+};
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">set</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; &amp;board, <span class="hljs-keyword">int</span> y, <span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> type, <span class="hljs-keyword">int</span> delta)</span></span>{
+    <span class="hljs-keyword">bool</span> ok = <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i&lt;<span class="hljs-number">3</span>; i++){
+        <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> ny = y + coverType[type][i][<span class="hljs-number">0</span>];
+        <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> nx = x + coverType[type][i][<span class="hljs-number">1</span>];
+        <span class="hljs-keyword">if</span>(ny &lt; <span class="hljs-number">0</span> || ny &gt;= board.size() || nx &lt; <span class="hljs-number">0</span> || nx &gt;= board[<span class="hljs-number">0</span>].size()){
+            ok = <span class="hljs-literal">false</span>;
+        }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>((board[ny][nx] += delta) &gt; <span class="hljs-number">1</span>){
+            ok = <span class="hljs-literal">false</span>;
+        }
+    }
+    <span class="hljs-keyword">return</span> ok;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">cover</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; &amp;board)</span> </span>{
+    <span class="hljs-comment">//&#x5728;&#x5269;&#x4F59;&#x672A;&#x88AB;&#x8986;&#x76D6;&#x7684;&#x683C;&#x5B50;&#x4E2D;&#xFF0C;&#x5BFB;&#x627E;&#x6446;&#x653E;&#x5728;&#x6700;&#x5DE6;&#x4E0A;&#x89D2;&#x7684;&#x683C;&#x5B50;</span>
+    <span class="hljs-keyword">int</span> y = -<span class="hljs-number">1</span>, x = -<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; board.size(); ++i) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; board[i].size(); ++j) {
+            <span class="hljs-keyword">if</span> (board[i][j] == <span class="hljs-number">0</span>) {
+                y = i;
+                x = j;
+                <span class="hljs-keyword">break</span>;
+            }
+        }
+        <span class="hljs-keyword">if</span> (y != -<span class="hljs-number">1</span>) {
+            <span class="hljs-keyword">break</span>;
+        }
+    }
+
+    <span class="hljs-comment">//&#x521D;&#x59CB;&#x90E8;&#x5206;&#xFF1A; &#x5DF2;&#x8986;&#x76D6;&#x6240;&#x6709;&#x767D;&#x683C;&#x5B50;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;1.</span>
+    <span class="hljs-keyword">if</span> (y == -<span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+
+    <span class="hljs-keyword">int</span> ret = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> type = <span class="hljs-number">0</span>; type &lt; <span class="hljs-number">4</span>; type++) {
+        <span class="hljs-comment">//&#x5982;&#x679C;&#x80FD;&#x4EE5;type&#x7684;&#x5F62;&#x5F0F;&#x8986;&#x76D6;board[y][x], &#x5C31;&#x8FDB;&#x884C;&#x9012;&#x5F52;&#x8C03;&#x7528;</span>
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">set</span>(board, y, x, type, <span class="hljs-number">1</span>)) {
+            ret += cover(board);
+        }
+        <span class="hljs-built_in">set</span>(board, y, x, type, -<span class="hljs-number">1</span>);
+
+    }
+    <span class="hljs-keyword">return</span> ret;
+
+}
+
+
+
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+<span class="hljs-preprocessor">#<span class="hljs-keyword">ifdef</span> ONLINE_JUDGE</span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">else</span></span>
+    freopen(<span class="hljs-string">&quot;F:\\ClionProjects\\Algorithm\\input.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>, <span class="hljs-built_in">stdin</span>);
+<span class="hljs-comment">//    freopen(&quot;F:\\ClionProjects\\Algorithm\\output.txt&quot;, &quot;w&quot;, stdout);</span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">endif</span></span>
+    <span class="hljs-keyword">int</span> C = <span class="hljs-number">0</span>, H = <span class="hljs-number">0</span>, W = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;C);
+<span class="hljs-comment">//    printf(&quot;%d\n&quot;, C);</span>
+
+
+    <span class="hljs-keyword">while</span> (C--) {
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d %d&quot;</span>, &amp;H, &amp;W);
+        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; board(H, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;(W));
+        <span class="hljs-keyword">char</span> ch;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; H; i++) {
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; W; j++) {
+                <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot; %c&quot;</span>, &amp;ch);
+                <span class="hljs-keyword">if</span> (ch == <span class="hljs-string">&apos;#&apos;</span>) {
+                    board[i][j] = <span class="hljs-number">1</span>;
+                } <span class="hljs-keyword">else</span> {
+                    board[i][j] = <span class="hljs-number">0</span>;
+                }
+            }
+        }
+
+        <span class="hljs-keyword">int</span> ways = cover(board);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, ways);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../search/Boggle.html" class="navigation navigation-prev " aria-label="Previous page: 穷举搜索之Boogle"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="../divide/readme.html" class="navigation navigation-next " aria-label="Next page: 分治"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="../gitbook/app.js"></script>
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-search/search.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"highlight":{},"search":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"livereload":{}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>
